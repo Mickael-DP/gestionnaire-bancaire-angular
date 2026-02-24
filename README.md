@@ -1,59 +1,91 @@
-# GestionnaireBancaireFront
+# 💳 Gestionnaire Bancaire — Frontend Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+Interface web d'une application bancaire connectée à une API REST Spring Boot.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🛠️ Stack technique
+
+- **Angular 21**
+- **Tailwind CSS v4**
+- **TypeScript**
+- **RxJS** (Observables, async pipe)
+- **Reactive Forms**
+
+---
+
+## ✨ Fonctionnalités
+
+- 📋 Liste de tous les comptes bancaires
+- 🔍 Détail d'un compte (titulaire, numéro, solde, type)
+- ➕ Création d'un nouveau compte bancaire
+- 💰 Dépôt et retrait d'argent (via modale)
+- 💸 Virement entre deux comptes
+- 🗑️ Suppression d'un compte
+
+---
+
+## 🚀 Lancer le projet
+
+### Prérequis
+
+- Node.js
+- Angular CLI (`npm install -g @angular/cli`)
+- Le backend Spring Boot doit tourner sur `http://localhost:8080`
+  👉 [Repo backend](https://github.com/Mickael-DP/gestionnaire-bancaire-spring-boot)
+
+### Installation
+
+```bash
+npm install
+```
+
+### Démarrer le serveur de développement
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+L'application est accessible sur `http://localhost:4200`
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📁 Structure du projet
 
-```bash
-ng generate component component-name
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── liste-comptes/       # Liste de tous les comptes
+│   │   ├── detail-compte/       # Détail + dépôt/retrait
+│   │   ├── creation-compte/     # Formulaire de création
+│   │   └── virement/            # Formulaire de virement
+│   ├── models/
+│   │   └── compte.model.ts      # Interfaces TypeScript
+│   └── services/
+│       └── compte.service.ts    # Appels API REST
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🔗 API Backend
 
-## Building
+L'application consomme les endpoints suivants :
 
-To build the project run:
+| Méthode | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/comptes` | Liste tous les comptes |
+| GET | `/api/comptes/{id}` | Détail d'un compte |
+| POST | `/api/comptes` | Créer un compte |
+| PUT | `/api/comptes/{id}/depot` | Effectuer un dépôt |
+| PUT | `/api/comptes/{id}/retrait` | Effectuer un retrait |
+| POST | `/api/comptes/virement` | Effectuer un virement |
+| DELETE | `/api/comptes/{id}` | Supprimer un compte |
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📌 À venir
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- 🔐 Authentification avec Spring Security + JWT
+- 👤 Gestion des utilisateurs (comptes liés à un user)
+- 📊 Historique des mouvements

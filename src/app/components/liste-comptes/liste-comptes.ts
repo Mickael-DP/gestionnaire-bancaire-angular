@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CompteService } from '../../services/compte.service';
 import { Compte } from '../../models/compte.model';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-liste-comptes',
@@ -11,13 +13,15 @@ import { CommonModule } from '@angular/common';
 })
 export class ListeComptes implements OnInit {
 
-  comptes: Compte[] = [];
+  comptes$: Observable<Compte[]> | null = null;
 
-  constructor(private compteService: CompteService) {}
-
-  ngOnInit(): void {
-    this.compteService.listerComptes().subscribe(data => {
-      this.comptes = data;
-    });
+  constructor(private compteService: CompteService, private route: Router) {}
+ngOnInit(): void {
+    this.comptes$ = this.compteService.listerComptes();
   }
+
+  consulterCompte(id: number): void {
+    this.route.navigate(['/comptes', id]);
+  }
+
 }

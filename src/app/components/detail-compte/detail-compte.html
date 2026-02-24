@@ -1,0 +1,70 @@
+<div>
+  @if (compte$ | async; as compte) {
+    <div class="max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow-md">
+      <h1 class="text-3xl font-bold text-gray-800 mb-4">💳 Détails du Compte</h1>
+      <p class="text-xl font-semibold text-gray-800">{{ compte.titulaire }}</p>
+      <p class="text-sm text-gray-500">{{ compte.compteNumber }}</p>
+      <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full mt-1 inline-block">
+        {{ compte.type }}
+      </span>
+      <p class="text-2xl font-bold text-green-600 mt-4">{{ compte.solde }} €</p>
+      <div class="mt-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <button
+              class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              (click)="ouvrirModal('depot')"
+            >
+              Déposer de l'argent
+            </button>
+            <button
+              class="ml-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              (click)="ouvrirModal('retrait')"
+            >
+              Retirer de l'argent
+            </button>
+          </div>
+          <div>
+            <button
+              class="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+              (click)="suppCompte()"
+            >
+          🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+      @if (showModal) {
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div class="bg-white rounded-2xl p-6 w-96 shadow-xl">
+            <h2 class="text-xl font-bold mb-4">
+              {{ operationType === 'depot' ? 'Déposer' : 'Retirer' }} de l'argent
+            </h2>
+            <input
+              type="number"
+              [(ngModel)]="montant"
+              placeholder="Montant en €"
+              class="w-full border border-gray-300 rounded-md p-2 mb-4"
+            />
+            <div class="flex justify-end gap-4">
+              <button
+                (click)="fermerModal()"
+                class="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+              >
+                Annuler
+              </button>
+              <button
+                (click)="confirmerOperation()"
+                class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+              >
+                Confirmer
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="text-center text-gray-500 mt-10">Chargement des détails du compte...</p>
+  }
+</div>

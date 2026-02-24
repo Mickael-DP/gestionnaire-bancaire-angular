@@ -6,3 +6,8 @@ export interface Compte {
     type: string;
 }
 
+export interface CompteCreation {
+    titulaire: string | null;
+    type: string | null;
+}
+
