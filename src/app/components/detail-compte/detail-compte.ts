@@ -1,14 +1,17 @@
-import {  Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Compte } from '../../models/compte.model';
 import { CompteService } from '../../services/compte.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-detail-compte',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ButtonModule, TagModule, DialogModule, RouterModule],
   templateUrl: './detail-compte.html',
   styleUrl: './detail-compte.css',
 })
@@ -20,11 +23,10 @@ export class DetailCompte implements OnInit {
   showModal: boolean = false;
   operationType: 'depot' | 'retrait' | null = null;
 
-constructor(
-  private route: ActivatedRoute,
-  private compteService: CompteService,
-
-) {}
+  constructor(
+    private route: ActivatedRoute,
+    private compteService: CompteService,
+  ) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -47,8 +49,8 @@ constructor(
 
   confirmerOperation(): void {
     if (this.id && this.montant && this.operationType) {
-      const operation$ = this.operationType === 'depot' 
-        ? this.compteService.deposer(this.id, this.montant) 
+      const operation$ = this.operationType === 'depot'
+        ? this.compteService.deposer(this.id, this.montant)
         : this.compteService.retirer(this.id, this.montant);
 
       operation$.subscribe(() => {

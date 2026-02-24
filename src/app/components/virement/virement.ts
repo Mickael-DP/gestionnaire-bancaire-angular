@@ -4,10 +4,11 @@ import { CompteService } from '../../services/compte.service';
 import { Observable } from 'rxjs';
 import { Compte } from '../../models/compte.model';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-virement',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './virement.html',
   styleUrl: './virement.css',
 })
@@ -20,10 +21,10 @@ export class Virement implements OnInit {
 
   comptes$: Observable<Compte[]> | null = null;
 
-  constructor(private compteService: CompteService) {}
+  constructor(private compteService: CompteService) { }
 
   ngOnInit(): void {
-     this.comptes$ = this.compteService.listerComptes();
+    this.comptes$ = this.compteService.listerComptes();
   }
 
   effectuerVirement(): void {

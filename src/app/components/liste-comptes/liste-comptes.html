@@ -1,24 +1,63 @@
-<div class="max-w-4xl mx-auto p-6">
-  <h1 class="text-3xl font-bold text-gray-800 mb-6">💳 Mes Comptes</h1>
+<div class="max-w-5xl mx-auto px-6 py-10">
+
+  <!-- Header -->
+  <div class="flex items-end justify-between mb-8">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Mes Comptes</h1>
+      <p class="text-sm text-gray-400 mt-1">Vue d'ensemble de vos comptes bancaires</p>
+    </div>
+    <a routerLink="/comptes/create" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-800 text-white text-sm font-semibold
+              hover:bg-blue-900 transition-all duration-200 shadow-md shadow-blue-800/15 no-underline">
+      <span class="pi pi-plus text-xs"></span>
+      Nouveau compte
+    </a>
+  </div>
+
+  <!-- Comptes Grid -->
   <div class="grid gap-4">
-@for (compte of comptes$ | async; track compte.id) {
-      <div class="bg-white rounded-2xl shadow-md p-6 flex justify-between items-center hover:shadow-lg transition">
-        
-        <div>
-          <p class="text-xl font-semibold text-gray-800">{{ compte.titulaire }}</p>
-          <p class="text-sm text-gray-500">{{ compte.compteNumber }}</p>
-          <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full mt-1 inline-block">
-            {{ compte.type }}
-          </span>
+    @for (compte of comptes$ | async; track compte.id) {
+    <div class="group bg-white border border-gray-100 rounded-2xl p-6
+                  hover:border-blue-200 hover:shadow-lg hover:shadow-blue-800/5
+                  transition-all duration-300 cursor-pointer" (click)="consulterCompte(compte.id)">
+      <div class="flex justify-between items-center">
+
+        <!-- Left -->
+        <div class="flex items-center gap-4">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center text-lg" [class]="compte.type === 'COURANT'
+                   ? 'bg-blue-50 text-blue-700'
+                   : 'bg-emerald-50 text-emerald-600'">
+            <span [class]="compte.type === 'COURANT' ? 'pi pi-wallet' : 'pi pi-bookmark'"></span>
+          </div>
+          <div>
+            <p class="text-base font-semibold text-gray-900">{{ compte.titulaire }}</p>
+            <p class="text-xs text-gray-400 font-mono tracking-wide mt-0.5">{{ compte.compteNumber }}</p>
+            <p-tag class="mt-2 inline-block" [value]="compte.type === 'COURANT' ? 'Courant' : 'Épargne'"
+              [severity]="compte.type === 'COURANT' ? 'info' : 'success'" [rounded]="true" />
+          </div>
         </div>
 
-        <div class="text-right">
-          <p class="text-2xl font-bold text-green-600">{{ compte.solde }} €</p>
-          <button class="mt-2 text-sm bg-blue-600 text-white px-4 py-1 rounded-full hover:bg-blue-700 transition" (click)="consulterCompte(compte.id)">
-            Voir détails
-          </button>
+        <!-- Right -->
+        <div class="text-right flex items-center gap-5">
+          <div>
+            <p class="text-2xl font-bold tracking-tight" [class]="compte.solde >= 0 ? 'text-gray-900' : 'text-red-500'">
+              {{ compte.solde | number:'1.2-2' }}&nbsp;€
+            </p>
+            <p class="text-xs text-gray-400 mt-1">Solde disponible</p>
+          </div>
+          <span
+            class="pi pi-chevron-right text-gray-300 group-hover:text-blue-600 transition-colors duration-200"></span>
         </div>
       </div>
+    </div>
     }
   </div>
+
+  <!-- Empty state -->
+  @if ((comptes$ | async)?.length === 0) {
+  <div class="text-center py-24">
+    <span class="pi pi-inbox text-5xl text-gray-200 mb-4 block"></span>
+    <p class="text-gray-400 font-medium">Aucun compte trouvé</p>
+    <p class="text-sm text-gray-300 mt-1">Créez votre premier compte bancaire pour commencer</p>
+  </div>
+  }
 </div>

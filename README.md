@@ -8,6 +8,7 @@ Interface web d'une application bancaire connectée à une API REST Spring Boot.
 
 - **Angular 21**
 - **Tailwind CSS v4**
+- **PrimeNG** (composants UI : Tag, Dialog…)
 - **TypeScript**
 - **RxJS** (Observables, async pipe)
 - **Reactive Forms**
@@ -56,14 +57,15 @@ L'application est accessible sur `http://localhost:4200`
 src/
 ├── app/
 │   ├── components/
-│   │   ├── liste-comptes/       # Liste de tous les comptes
-│   │   ├── detail-compte/       # Détail + dépôt/retrait
-│   │   ├── creation-compte/     # Formulaire de création
-│   │   └── virement/            # Formulaire de virement
+│   │   ├── navbar/               # Sidebar de navigation
+│   │   ├── liste-comptes/        # Liste de tous les comptes
+│   │   ├── detail-compte/        # Détail + dépôt/retrait
+│   │   ├── creation-compte/      # Formulaire de création
+│   │   └── virement/             # Formulaire de virement
 │   ├── models/
-│   │   └── compte.model.ts      # Interfaces TypeScript
+│   │   └── compte.model.ts       # Interfaces TypeScript
 │   └── services/
-│       └── compte.service.ts    # Appels API REST
+│       └── compte.service.ts     # Appels API REST
 ```
 
 ---
