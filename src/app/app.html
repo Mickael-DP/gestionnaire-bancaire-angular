@@ -1,6 +1,8 @@
 <div class="flex min-h-screen">
+    @if (showNavbar()) {
     <app-navbar />
-    <main class="flex-1 ml-60 bg-gray-50 min-h-screen">
+    }
+    <main class="flex-1 bg-gray-50 min-h-screen" [class.ml-60]="showNavbar()">
         <router-outlet />
     </main>
 </div>

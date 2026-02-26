@@ -5,10 +5,13 @@ import { Observable } from 'rxjs';
 import { Compte } from '../../models/compte.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-virement',
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, ToastModule,],
+  providers: [MessageService],
   templateUrl: './virement.html',
   styleUrl: './virement.css',
 })
@@ -21,7 +24,7 @@ export class Virement implements OnInit {
 
   comptes$: Observable<Compte[]> | null = null;
 
-  constructor(private compteService: CompteService) { }
+  constructor(private compteService: CompteService, private messagerieService: MessageService) { }
 
   ngOnInit(): void {
     this.comptes$ = this.compteService.listerComptes();
@@ -32,11 +35,11 @@ export class Virement implements OnInit {
       const { idSource, idDestination, montant } = this.virementForm.getRawValue();
       this.compteService.virement(idSource!, idDestination!, montant!).subscribe({
         next: () => {
-          alert('Virement effectué avec succès');
+          this.messagerieService.add({ severity: 'success', summary: 'Virement réussi', detail: `Virement de ${montant}€ effectué avec succès.` });
           this.virementForm.reset();
         },
         error: (err) => {
-          alert('Erreur lors du virement : ' + err.message);
+          this.messagerieService.add({ severity: 'error', summary: 'Erreur de virement', detail: `Le virement a échoué : ${err.error.message || err.message}` });
         },
       });
     }
