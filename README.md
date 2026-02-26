@@ -1,6 +1,6 @@
 # 💳 Gestionnaire Bancaire — Frontend Angular
 
-Interface web d'une application bancaire connectée à une API REST Spring Boot.
+Interface web d'une application bancaire connectée à une API REST Spring Boot sécurisée par JWT.
 
 ---
 
@@ -8,21 +8,25 @@ Interface web d'une application bancaire connectée à une API REST Spring Boot.
 
 - **Angular 21**
 - **Tailwind CSS v4**
-- **PrimeNG** (composants UI : Tag, Dialog…)
+- **PrimeNG 21** (Tag, Dialog, ConfirmDialog, Toast, Menubar)
 - **TypeScript**
-- **RxJS** (Observables, async pipe)
+- **RxJS** (Observables, async pipe, Signals)
 - **Reactive Forms**
 
 ---
 
 ## ✨ Fonctionnalités
 
-- 📋 Liste de tous les comptes bancaires
+- 🏠 Page d'accueil publique
+- 🔐 Inscription et connexion (JWT)
+- 📋 Liste des comptes bancaires de l'utilisateur connecté
 - 🔍 Détail d'un compte (titulaire, numéro, solde, type)
 - ➕ Création d'un nouveau compte bancaire
-- 💰 Dépôt et retrait d'argent (via modale)
+- 💰 Dépôt et retrait d'argent (via modale PrimeNG)
 - 💸 Virement entre deux comptes
-- 🗑️ Suppression d'un compte
+- 🗑️ Suppression d'un compte (avec confirmation)
+- 🔒 Routes protégées (Guard JWT)
+- 👤 Navbar avec infos utilisateur et déconnexion
 
 ---
 
@@ -54,40 +58,77 @@ L'application est accessible sur `http://localhost:4200`
 ## 📁 Structure du projet
 
 ```
-src/
-├── app/
-│   ├── components/
-│   │   ├── navbar/               # Sidebar de navigation
-│   │   ├── liste-comptes/        # Liste de tous les comptes
-│   │   ├── detail-compte/        # Détail + dépôt/retrait
-│   │   ├── creation-compte/      # Formulaire de création
-│   │   └── virement/             # Formulaire de virement
-│   ├── models/
-│   │   └── compte.model.ts       # Interfaces TypeScript
-│   └── services/
-│       └── compte.service.ts     # Appels API REST
+src/app/
+├── core/
+│   ├── guards/
+│   │   └── auth.guard.ts          # Protection des routes
+│   └── interceptors/
+│       └── auth.interceptor.ts    # Ajout automatique du token JWT
+│
+├── features/
+│   ├── auth/
+│   │   ├── components/
+│   │   │   ├── login/             # Page de connexion
+│   │   │   └── register/          # Page d'inscription
+│   │   └── services/
+│   │       └── auth.service.ts    # login, register, token management
+│   │
+│   ├── comptes/
+│   │   ├── components/
+│   │   │   ├── liste-comptes/     # Liste des comptes
+│   │   │   ├── detail-compte/     # Détail + dépôt/retrait
+│   │   │   └── creation-compte/   # Formulaire de création
+│   │   └── services/
+│   │       └── compte.service.ts  # Appels API comptes
+│   │
+│   └── virement/
+│       └── components/
+│           └── virement/          # Formulaire de virement
+│
+├── layouts/
+│   ├── public-layout/
+│   │   └── home/                  # Page d'accueil
+│   └── auth-layout/
+│       └── navbar/                # Sidebar navigation
+│
+└── shared/
+    └── models/
+        └── compte.model.ts        # Interfaces TypeScript
 ```
+
+---
+
+## 🔐 Authentification
+
+L'application utilise JWT stocké dans le `localStorage`. Un interceptor ajoute automatiquement le token dans chaque requête HTTP. Un guard protège les routes privées et redirige vers `/connexion` si non authentifié.
 
 ---
 
 ## 🔗 API Backend
 
-L'application consomme les endpoints suivants :
-
-| Méthode | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/comptes` | Liste tous les comptes |
-| GET | `/api/comptes/{id}` | Détail d'un compte |
-| POST | `/api/comptes` | Créer un compte |
-| PUT | `/api/comptes/{id}/depot` | Effectuer un dépôt |
-| PUT | `/api/comptes/{id}/retrait` | Effectuer un retrait |
-| POST | `/api/comptes/virement` | Effectuer un virement |
-| DELETE | `/api/comptes/{id}` | Supprimer un compte |
+| Méthode | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/auth/register` | Inscription | ❌ |
+| POST | `/auth/login` | Connexion | ❌ |
+| GET | `/auth/me` | Infos utilisateur connecté | ✅ |
+| GET | `/api/comptes` | Liste des comptes | ✅ |
+| GET | `/api/comptes/{id}` | Détail d'un compte | ✅ |
+| POST | `/api/comptes` | Créer un compte | ✅ |
+| PUT | `/api/comptes/{id}/depot` | Effectuer un dépôt | ✅ |
+| PUT | `/api/comptes/{id}/retrait` | Effectuer un retrait | ✅ |
+| POST | `/api/comptes/virement` | Effectuer un virement | ✅ |
+| DELETE | `/api/comptes/{id}` | Supprimer un compte | ✅ |
 
 ---
 
 ## 📌 À venir
 
-- 🔐 Authentification avec Spring Security + JWT
-- 👤 Gestion des utilisateurs (comptes liés à un user)
 - 📊 Historique des mouvements
+
+## 👨‍💻 Auteur
+
+**Mickael DALLE PASQUALINE** - Apprentissage Angular
+
+## 📄 Licence
+
+Ce projet est à but éducatif.

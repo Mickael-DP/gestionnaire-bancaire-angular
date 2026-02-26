@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompteService } from '../../services/compte.service';
-import { Compte } from '../../models/compte.model';
+import { Compte } from '../../../../shared/models/compte.model';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CompteService } from '../../services/compte.service';
+
 import { Observable } from 'rxjs';
-import { Compte } from '../../models/compte.model';
+import { Compte } from '../../../../shared/models/compte.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { CompteService } from '../../../comptes/services/compte.service';
 
 @Component({
   selector: 'app-virement',

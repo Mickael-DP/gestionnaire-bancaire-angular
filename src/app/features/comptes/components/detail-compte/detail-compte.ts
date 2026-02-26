@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Compte } from '../../models/compte.model';
+import { Compte } from '../../../../shared/models/compte.model';
 import { CompteService } from '../../services/compte.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';

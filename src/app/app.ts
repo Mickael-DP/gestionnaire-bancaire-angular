@@ -1,9 +1,9 @@
 import { Component, computed, inject } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
-import { Navbar } from "./components/navbar/navbar";
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Navbar } from './layout/auth-layout/navbar/navbar';
 
 @Component({
   selector: 'app-root',

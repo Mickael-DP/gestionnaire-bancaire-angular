@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { ListeComptes } from './components/liste-comptes/liste-comptes';
-import { DetailCompte } from './components/detail-compte/detail-compte';
-import { CreationCompte } from './components/creation-compte/creation-compte';
-import { Virement } from './components/virement/virement';
-import { Home } from './components/home/home';
-import { Login } from './components/login/login';
-import { Register } from './components/register/register';
+import { ListeComptes } from './features/comptes/components/liste-comptes/liste-comptes';
+import { DetailCompte } from './features/comptes/components/detail-compte/detail-compte';
+import { CreationCompte } from './features/comptes/components/creation-compte/creation-compte';
+import { Virement } from './features/virements/components/virement/virement';
+import { Home } from './layout/public-layout/home/home';
+import { Register } from './features/auth/components/register/register';
+import { Login } from './features/auth/components/login/login';
 
 export const routes: Routes = [
     { path: '', component: Home },
