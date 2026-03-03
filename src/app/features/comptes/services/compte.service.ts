@@ -39,4 +39,8 @@ export class CompteService {
   virement(idSource: number, idDestination: number, montant: number): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/virement`, { idSource, idDestination, montant });
   }
+
+  historique(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${id}/historiques`);
+  }
 }

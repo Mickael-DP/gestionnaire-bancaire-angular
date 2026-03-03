@@ -10,7 +10,7 @@ import { TagModule } from 'primeng/tag';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialog } from 'primeng/confirmdialog';
-import {  ToastModule } from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-detail-compte',
@@ -22,6 +22,7 @@ import {  ToastModule } from 'primeng/toast';
 export class DetailCompte implements OnInit {
 
   compte$: Observable<Compte> | null = null;
+  mouvements$: Observable<any[]> | null = null;
   id: number | null = null;
   montant: number | null = null;
   showModal: boolean = false;
@@ -40,6 +41,7 @@ export class DetailCompte implements OnInit {
     if (id) {
       this.id = id;
       this.compte$ = this.compteService.consulterCompte(id);
+      this.mouvements$ = this.compteService.historique(id);
     }
   }
 
@@ -62,29 +64,30 @@ export class DetailCompte implements OnInit {
 
       operation$.subscribe(() => {
         this.compte$ = this.compteService.consulterCompte(this.id!);
+        this.mouvements$ = this.compteService.historique(this.id!);
         this.fermerModal();
       });
     }
   }
 
- suppCompte(): void {
-  this.confirmationService.confirm({
-    message: 'Êtes-vous sûr de vouloir supprimer ce compte ?',
-    header: 'Confirmation de suppression',
-    icon: 'pi pi-exclamation-triangle',
-    acceptLabel: 'Supprimer',
-    rejectLabel: 'Annuler',
-    accept: () => {
-      this.compteService.deleteCompte(this.id!).subscribe({
-        next: () => {
-          this.messageService.add({ severity: 'success', summary: 'Compte supprimé', detail: 'Le compte a bien été supprimé.' });
-          setTimeout(() => this.router.navigate(['/comptes']), 1500);
-        },
-        error: () => {
-          this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'La suppression a échoué.' });
-        }
-      });
-    }
-  });
-}
+  suppCompte(): void {
+    this.confirmationService.confirm({
+      message: 'Êtes-vous sûr de vouloir supprimer ce compte ?',
+      header: 'Confirmation de suppression',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Supprimer',
+      rejectLabel: 'Annuler',
+      accept: () => {
+        this.compteService.deleteCompte(this.id!).subscribe({
+          next: () => {
+            this.messageService.add({ severity: 'success', summary: 'Compte supprimé', detail: 'Le compte a bien été supprimé.' });
+            setTimeout(() => this.router.navigate(['/comptes']), 1500);
+          },
+          error: () => {
+            this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'La suppression a échoué.' });
+          }
+        });
+      }
+    });
+  }
 }
