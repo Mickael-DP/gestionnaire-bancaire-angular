@@ -2,12 +2,13 @@ export interface Compte {
     id: number;
     compteNumber: string;
     solde: number;
-    titulaire: string;
+    nomCompte: string;
     type: string;
+    titulaire: string;
 }
 
 export interface CompteCreation {
-    titulaire: string | null;
+    nomCompte: string | null;
     type: string | null;
 }
 

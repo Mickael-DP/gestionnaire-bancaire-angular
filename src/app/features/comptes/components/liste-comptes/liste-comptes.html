@@ -29,20 +29,25 @@
             <span [class]="compte.type === 'COURANT' ? 'pi pi-wallet' : 'pi pi-bookmark'"></span>
           </div>
           <div>
-            <p class="text-base font-semibold text-gray-900">{{ compte.titulaire }}</p>
-            <p class="text-xs text-gray-400 font-mono tracking-wide mt-0.5">{{ compte.compteNumber }}</p>
-            <p-tag class="mt-2 inline-block" [value]="compte.type === 'COURANT' ? 'Courant' : 'Épargne'"
+            <p class="text-base font-bold text-gray-900">{{ compte.nomCompte || 'Compte sans nom' }}</p>
+            <div class="flex items-center gap-2 mt-0.5">
+              <p class="text-xs text-gray-400 font-medium">{{ compte.titulaire }}</p>
+              <span class="w-1 h-1 rounded-full bg-gray-200"></span>
+              <p class="text-xs text-gray-400 font-mono tracking-wider">{{ compte.compteNumber }}</p>
+            </div>
+            <p-tag class="mt-2.5 inline-block" [value]="compte.type === 'COURANT' ? 'Courant' : 'Épargne'"
               [severity]="compte.type === 'COURANT' ? 'info' : 'success'" [rounded]="true" />
           </div>
         </div>
 
         <!-- Right -->
-        <div class="text-right flex items-center gap-5">
+        <div class="text-right flex items-center gap-6">
           <div>
-            <p class="text-2xl font-bold tracking-tight" [class]="compte.solde >= 0 ? 'text-gray-900' : 'text-red-500'">
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Solde</p>
+            <p class="text-2xl font-extrabold tracking-tight"
+              [class]="compte.solde >= 0 ? 'text-gray-900' : 'text-red-500'">
               {{ compte.solde | number:'1.2-2' }}&nbsp;€
             </p>
-            <p class="text-xs text-gray-400 mt-1">Solde disponible</p>
           </div>
           <span
             class="pi pi-chevron-right text-gray-300 group-hover:text-blue-600 transition-colors duration-200"></span>

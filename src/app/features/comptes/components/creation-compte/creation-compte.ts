@@ -13,7 +13,7 @@ import { CompteService } from '../../services/compte.service';
 export class CreationCompte {
 
   compteForm = new FormGroup({
-    titulaire: new FormControl<string>('', Validators.required),
+    nomCompte: new FormControl<string>('', Validators.required),
     type: new FormControl<string>('', Validators.required)
   });
 

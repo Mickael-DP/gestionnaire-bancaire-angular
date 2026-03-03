@@ -21,9 +21,10 @@ Interface web d'une application bancaire connectée à une API REST Spring Boot 
 - 🔐 Inscription et connexion (JWT)
 - 📋 Liste des comptes bancaires de l'utilisateur connecté
 - 🔍 Détail d'un compte (titulaire, numéro, solde, type)
-- ➕ Création d'un nouveau compte bancaire
+- ➕ Création d'un nouveau compte bancaire avec nom personnalisé
 - 💰 Dépôt et retrait d'argent (via modale PrimeNG)
 - 💸 Virement entre deux comptes
+- 📊 Historique des mouvements
 - 🗑️ Suppression d'un compte (avec confirmation)
 - 🔒 Routes protégées (Guard JWT)
 - 👤 Navbar avec infos utilisateur et déconnexion
@@ -40,13 +41,11 @@ Interface web d'une application bancaire connectée à une API REST Spring Boot 
   👉 [Repo backend](https://github.com/Mickael-DP/gestionnaire-bancaire-spring-boot)
 
 ### Installation
-
 ```bash
 npm install
 ```
 
 ### Démarrer le serveur de développement
-
 ```bash
 ng serve
 ```
@@ -56,7 +55,6 @@ L'application est accessible sur `http://localhost:4200`
 ---
 
 ## 📁 Structure du projet
-
 ```
 src/app/
 ├── core/
@@ -76,7 +74,7 @@ src/app/
 │   ├── comptes/
 │   │   ├── components/
 │   │   │   ├── liste-comptes/     # Liste des comptes
-│   │   │   ├── detail-compte/     # Détail + dépôt/retrait
+│   │   │   ├── detail-compte/     # Détail + dépôt/retrait + historique
 │   │   │   └── creation-compte/   # Formulaire de création
 │   │   └── services/
 │   │       └── compte.service.ts  # Appels API comptes
@@ -118,12 +116,9 @@ L'application utilise JWT stocké dans le `localStorage`. Un interceptor ajoute 
 | PUT | `/api/comptes/{id}/retrait` | Effectuer un retrait | ✅ |
 | POST | `/api/comptes/virement` | Effectuer un virement | ✅ |
 | DELETE | `/api/comptes/{id}` | Supprimer un compte | ✅ |
+| GET | `/api/comptes/{id}/historiques` | Historique des mouvements | ✅ |
 
 ---
-
-## 📌 À venir
-
-- 📊 Historique des mouvements
 
 ## 👨‍💻 Auteur
 
