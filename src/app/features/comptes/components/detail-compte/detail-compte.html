@@ -4,14 +4,12 @@
 <div class="max-w-4xl mx-auto px-6 py-10">
   @if (compte$ | async; as compte) {
 
-  <!-- Breadcrumb -->
   <div class="flex items-center gap-2 text-sm text-gray-400 mb-8">
     <a routerLink="/comptes" class="hover:text-blue-700 transition-colors no-underline text-gray-400">Mes Comptes</a>
     <span class="pi pi-chevron-right text-xs"></span>
     <span class="text-gray-600 font-medium">{{ compte.nomCompte }}</span>
   </div>
 
-  <!-- Top card with balance -->
   <div class="bg-white border border-gray-100 rounded-2xl p-8 mb-6 shadow-sm">
     <div class="flex justify-between items-start">
       <div class="flex items-center gap-4">
@@ -41,7 +39,6 @@
     </div>
   </div>
 
-  <!-- Action buttons -->
   <div class="grid grid-cols-3 gap-4 mb-6">
     <button (click)="ouvrirModal('depot')" class="flex items-center justify-center gap-3 bg-white border border-gray-100 rounded-2xl p-5
                      hover:border-emerald-200 hover:bg-emerald-50/50 transition-all duration-200 cursor-pointer group">
@@ -71,7 +68,6 @@
     </button>
   </div>
 
-  <!-- Transaction History -->
   <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm mt-8">
     <div class="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
       <h2 class="text-lg font-bold text-gray-900 tracking-tight">Historique des opérations</h2>
@@ -81,7 +77,6 @@
     <div class="divide-y divide-gray-50">
       @for (mouvement of mouvements$ | async; track mouvement.id) {
       <div class="px-6 py-4 hover:bg-gray-50/50 transition-colors flex justify-between items-center">
-        <!-- Left: Icon & Info -->
         <div class="flex items-center gap-4">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm"
             [class]="(mouvement.type?.toString()?.toUpperCase()?.includes('ENTRANT') || mouvement.type?.toString()?.toUpperCase() === 'DEPOT') ? 'bg-emerald-50 text-emerald-600' : 'bg-orange-50 text-orange-600'">
@@ -128,7 +123,6 @@
     </div>
   </div>
 
-  <!-- Modal -->
   <p-dialog [header]="operationType === 'depot' ? 'Déposer de l\'argent' : 'Retirer de l\'argent'"
     [(visible)]="showModal" [modal]="true" [style]="{ width: '420px' }" [draggable]="false" [resizable]="false"
     styleClass="rounded-2xl">

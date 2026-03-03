@@ -1,35 +1,50 @@
-<div
-    class="min-h-screen bg-blue-900 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-    <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-600 rounded-full blur-3xl"></div>
+<div class="min-h-screen flex flex-col lg:flex-row bg-blue-900 overflow-hidden">
+    <div class="hidden lg:block lg:w-1/2 relative">
+        <img src="/hero-card.png" alt="Sécurité Premium" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-blue-950/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-blue-900"></div>
     </div>
 
-    <div class="mb-12 relative z-10 p-4 bg-white/10 backdrop-blur-md rounded-[2.5rem] border border-white/20">
-        <img src="/logo.png" alt="BanqueApp Logo" class="w-48 h-auto shadow-2xl rounded-3xl">
-    </div>
+    <div class="flex-1 flex flex-col items-center justify-center p-8 lg:p-12 relative">
+        <div class="w-full max-w-[320px] flex flex-col items-center lg:items-start">
 
-    <div class="max-w-2xl relative z-10">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-            Bienvenue sur <span class="text-blue-200">BanqueApp</span>
-        </h1>
-        <p class="text-lg text-blue-100 mb-12 leading-relaxed max-w-lg mx-auto opacity-90">
-            Votre compagnon simple et intuitif pour gérer vos finances personnelles au quotidien.
-        </p>
-    </div>
+            <div class="mb-12 flex items-center gap-4">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="drop-shadow-lg">
+                    <rect width="48" height="48" rx="12" fill="#60A5FA" fill-opacity="0.2" />
+                    <path d="M24 12L12 18V22H36V18L24 12Z" fill="#60A5FA" />
+                    <rect x="14" y="24" width="4" height="8" rx="1" fill="#60A5FA" />
+                    <rect x="22" y="24" width="4" height="8" rx="1" fill="#60A5FA" />
+                    <rect x="30" y="24" width="4" height="8" rx="1" fill="#60A5FA" />
+                    <rect x="12" y="34" width="24" height="2" fill="#60A5FA" />
+                </svg>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-black text-white tracking-tighter uppercase leading-none">Ma
+                        Banque</span>
+                    <span class="text-[10px] text-blue-400 font-bold tracking-[0.2em] uppercase mt-1">Digital
+                        Banking</span>
+                </div>
+            </div>
 
-    <div class="flex flex-col sm:flex-row gap-4 w-full max-w-md relative z-10">
-        <a routerLink="/inscription"
-            class="flex-1 inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-white text-blue-900 font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-xl shadow-black/10 active:scale-95 no-underline">
-            Ouvrir un compte
-        </a>
-        <a routerLink="/connexion"
-            class="flex-1 inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-blue-800 text-white border border-white/20 font-bold text-lg hover:bg-blue-700 transition-all duration-300 active:scale-95 no-underline">
-            Se connecter
-        </a>
-    </div>
+            <div class="text-center lg:text-left mb-10">
+                <h1 class="text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight">
+                    Simplifiez votre <br><span class="text-blue-400">gestion bancaire.</span>
+                </h1>
+                <p class="text-sm text-blue-100/60 leading-relaxed font-medium">
+                    L'essentiel de votre banque, accessible en un instant.
+                </p>
+            </div>
 
-    <p class="absolute bottom-8 text-blue-200 text-sm font-medium opacity-60">
-        Simple. Sûr. Efficace.
-    </p>
+            <div class="flex flex-col gap-3 w-full">
+                <a routerLink="/inscription"
+                    class="w-full inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white text-blue-900 font-bold text-sm hover:bg-blue-50 transition-all no-underline shadow-lg">
+                    Ouvrir un compte
+                </a>
+                <a routerLink="/connexion"
+                    class="w-full inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-800 text-white border border-white/10 font-bold text-sm hover:bg-blue-700 transition-all no-underline">
+                    Se connecter
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
