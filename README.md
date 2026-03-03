@@ -81,7 +81,7 @@ src/app/
 │   │   └── services/
 │   │       └── compte.service.ts  # Appels API comptes
 │   │
-│   └── virement/
+│   └── virements/
 │       └── components/
 │           └── virement/          # Formulaire de virement
 │
