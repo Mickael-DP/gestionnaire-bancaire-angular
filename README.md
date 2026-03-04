@@ -4,6 +4,16 @@ Interface web d'une application bancaire connectée à une API REST Spring Boot 
 
 ---
 
+## 🔎 Points techniques clés
+
+- Interceptor HTTP pour injection automatique du token
+- Guard de protection des routes privées
+- Séparation core / features / shared
+- Appels API centralisés dans des services
+- Utilisation du async pipe pour éviter les subscriptions manuelles
+
+---
+
 ## 🛠️ Stack technique
 
 - **Angular 21**
