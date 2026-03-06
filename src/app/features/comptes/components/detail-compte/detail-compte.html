@@ -1,100 +1,102 @@
 <p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>
 
-<div class="max-w-4xl mx-auto px-6 py-10">
+<div class="max-w-4xl mx-auto px-4 lg:px-6 py-20 lg:py-10">
   @if (compte$ | async; as compte) {
 
-  <div class="flex items-center gap-2 text-sm text-gray-400 mb-8">
+  <div class="flex items-center gap-2 text-xs lg:text-sm text-gray-400 mb-8 overflow-hidden whitespace-nowrap">
     <a routerLink="/comptes" class="hover:text-blue-700 transition-colors no-underline text-gray-400">Mes Comptes</a>
-    <span class="pi pi-chevron-right text-xs"></span>
-    <span class="text-gray-600 font-medium">{{ compte.nomCompte }}</span>
+    <span class="pi pi-chevron-right text-[10px]"></span>
+    <span class="text-gray-600 font-medium truncate">{{ compte.nomCompte }}</span>
   </div>
 
-  <div class="bg-white border border-gray-100 rounded-2xl p-8 mb-6 shadow-sm">
-    <div class="flex justify-between items-start">
+  <div class="bg-white border border-gray-100 rounded-2xl p-6 lg:p-8 mb-6 shadow-sm">
+    <div class="flex flex-col lg:flex-row justify-between lg:items-start gap-8">
       <div class="flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-xl" [class]="compte.type === 'COURANT'
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" [class]="compte.type === 'COURANT'
                  ? 'bg-blue-50 text-blue-700'
                  : 'bg-emerald-50 text-emerald-600'">
           <span [class]="compte.type === 'COURANT' ? 'pi pi-wallet' : 'pi pi-bookmark'"></span>
         </div>
         <div>
-          <h1 class="text-xl font-bold text-gray-900">{{ compte.nomCompte || 'Compte sans nom' }}</h1>
-          <div class="flex items-center gap-2 mt-0.5">
-            <p class="text-sm text-gray-400 font-medium">{{ compte.titulaire }}</p>
+          <h1 class="text-xl font-bold text-gray-900 leading-tight">{{ compte.nomCompte || 'Compte sans nom' }}</h1>
+          <div class="flex items-center gap-2 mt-1">
+            <p class="text-sm text-gray-400 font-medium truncate max-w-[120px]">{{ compte.titulaire }}</p>
             <span class="w-1 h-1 rounded-full bg-gray-200"></span>
-            <p class="text-sm text-gray-400 font-mono tracking-wide">{{ compte.compteNumber }}</p>
+            <p class="text-sm text-gray-400 font-mono">{{ compte.compteNumber.slice(-4) }}</p>
           </div>
           <p-tag class="mt-2.5 inline-block" [value]="compte.type === 'COURANT' ? 'Compte Courant' : 'Compte Épargne'"
             [severity]="compte.type === 'COURANT' ? 'info' : 'success'" [rounded]="true" />
         </div>
       </div>
 
-      <div class="text-right">
-        <p class="text-xs text-gray-400 uppercase tracking-wider font-medium mb-1">Solde disponible</p>
-        <p class="text-3xl font-bold tracking-tight" [class]="compte.solde >= 0 ? 'text-gray-900' : 'text-red-500'">
+      <div class="lg:text-right border-t lg:border-t-0 border-gray-50 pt-6 lg:pt-0">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest font-black mb-1">Solde disponible</p>
+        <p class="text-4xl font-black tracking-tighter" [class]="compte.solde >= 0 ? 'text-gray-900' : 'text-red-500'">
           {{ compte.solde | number:'1.2-2' }}&nbsp;€
         </p>
       </div>
     </div>
   </div>
 
-  <div class="grid grid-cols-3 gap-4 mb-6">
-    <button (click)="ouvrirModal('depot')" class="flex items-center justify-center gap-3 bg-white border border-gray-100 rounded-2xl p-5
+  <div class="grid grid-cols-3 gap-3 lg:gap-4 mb-6">
+    <button (click)="ouvrirModal('depot')" class="flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-3 bg-white border border-gray-100 rounded-2xl p-4 lg:p-5
                      hover:border-emerald-200 hover:bg-emerald-50/50 transition-all duration-200 cursor-pointer group">
-      <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center
+      <div class="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center
                     group-hover:bg-emerald-100 transition-colors">
         <span class="pi pi-arrow-down text-sm"></span>
       </div>
-      <span class="text-sm font-semibold text-gray-700 group-hover:text-emerald-700">Déposer</span>
+      <span class="text-[11px] lg:text-sm font-bold text-gray-700 group-hover:text-emerald-700">Déposer</span>
     </button>
 
-    <button (click)="ouvrirModal('retrait')" class="flex items-center justify-center gap-3 bg-white border border-gray-100 rounded-2xl p-5
+    <button (click)="ouvrirModal('retrait')" class="flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-3 bg-white border border-gray-100 rounded-2xl p-4 lg:p-5
                      hover:border-orange-200 hover:bg-orange-50/50 transition-all duration-200 cursor-pointer group">
-      <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-500 flex items-center justify-center
+      <div class="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-orange-50 text-orange-500 flex items-center justify-center
                     group-hover:bg-orange-100 transition-colors">
         <span class="pi pi-arrow-up text-sm"></span>
       </div>
-      <span class="text-sm font-semibold text-gray-700 group-hover:text-orange-700">Retirer</span>
+      <span class="text-[11px] lg:text-sm font-bold text-gray-700 group-hover:text-orange-700">Retirer</span>
     </button>
 
-    <button (click)="suppCompte()" class="flex items-center justify-center gap-3 bg-white border border-gray-100 rounded-2xl p-5
+    <button (click)="suppCompte()" class="flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-3 bg-white border border-gray-100 rounded-2xl p-4 lg:p-5
                      hover:border-red-200 hover:bg-red-50/50 transition-all duration-200 cursor-pointer group">
-      <div class="w-10 h-10 rounded-xl bg-red-50 text-red-400 flex items-center justify-center
+      <div class="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-red-50 text-red-400 flex items-center justify-center
                     group-hover:bg-red-100 transition-colors">
         <span class="pi pi-trash text-sm"></span>
       </div>
-      <span class="text-sm font-semibold text-gray-700 group-hover:text-red-600">Supprimer</span>
+      <span class="text-[11px] lg:text-sm font-bold text-gray-700 group-hover:text-red-600">Supprimer</span>
     </button>
   </div>
 
   <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm mt-8">
-    <div class="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
-      <h2 class="text-lg font-bold text-gray-900 tracking-tight">Historique des opérations</h2>
+    <div class="px-4 lg:px-6 py-5 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
+      <h2 class="text-lg font-bold text-gray-900 tracking-tight">Historique</h2>
       <p-tag [value]="((mouvements$ | async)?.length || 0) + ' opérations'" severity="info" [rounded]="true" />
     </div>
 
     <div class="divide-y divide-gray-50">
       @for (mouvement of mouvements$ | async; track mouvement.id) {
-      <div class="px-6 py-4 hover:bg-gray-50/50 transition-colors flex justify-between items-center">
-        <div class="flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm"
+      <div class="px-4 lg:px-6 py-4 hover:bg-gray-50/50 transition-colors flex justify-between items-center">
+        <div class="flex items-center gap-3 lg:gap-4 min-w-0">
+          <div class="w-9 h-9 lg:w-10 lg:h-10 rounded-xl flex items-center justify-center text-sm flex-shrink-0"
             [class]="(mouvement.type?.toString()?.toUpperCase()?.includes('ENTRANT') || mouvement.type?.toString()?.toUpperCase() === 'DEPOT') ? 'bg-emerald-50 text-emerald-600' : 'bg-orange-50 text-orange-600'">
             <span
               [class]="(mouvement.type?.toString()?.toUpperCase()?.includes('ENTRANT') || mouvement.type?.toString()?.toUpperCase() === 'DEPOT') ? 'pi pi-arrow-down-left' : 'pi pi-arrow-up-right'"></span>
           </div>
-          <div>
+          <div class="min-w-0">
             <div class="flex items-center gap-2">
-              <p class="text-sm font-bold text-gray-900">{{ mouvement.type?.replace('_', ' ') | titlecase }}</p>
+              <p class="text-sm font-bold text-gray-900 truncate">{{ mouvement.type?.replace('_', ' ') | titlecase }}
+              </p>
             </div>
             <div class="flex items-center gap-2 mt-0.5">
-              <p class="text-xs text-gray-400">{{ mouvement.date | date:'dd MMM yyyy, HH:mm' }}</p>
+              <p class="text-[10px] lg:text-xs text-gray-400 whitespace-nowrap">{{ mouvement.date | date:'dd MMM, HH:mm'
+                }}</p>
               @if (mouvement.type?.toString()?.toUpperCase()?.includes('VIREMENT')) {
-              <span class="w-1 h-1 rounded-full bg-gray-200"></span>
-              <p class="text-xs font-semibold text-gray-500">
+              <span class="hidden sm:inline w-1 h-1 rounded-full bg-gray-200"></span>
+              <p class="hidden sm:inline text-[10px] lg:text-xs font-semibold text-gray-500 truncate max-w-[100px]">
                 {{ (mouvement.type?.toString()?.toUpperCase()?.includes('ENTRANT')) ? 'De : ' : 'Vers : ' }}
                 <span class="text-blue-700">
-                  {{ mouvement.compteSource || mouvement.compteDestination || 'Compte tiers' }}
+                  {{ mouvement.compteSource || mouvement.compteDestination || 'Tiers' }}
                 </span>
               </p>
               }
@@ -102,8 +104,8 @@
           </div>
         </div>
 
-        <div class="text-right">
-          <p class="text-sm font-bold tracking-tight"
+        <div class="text-right flex-shrink-0 ml-4">
+          <p class="text-sm lg:text-base font-black tracking-tight"
             [class]="(mouvement.type?.toString()?.toUpperCase()?.includes('ENTRANT') || mouvement.type?.toString()?.toUpperCase() === 'DEPOT') ? 'text-emerald-600' : 'text-orange-600'">
             {{ (mouvement.type?.toString()?.toUpperCase()?.includes('ENTRANT') ||
             mouvement.type?.toString()?.toUpperCase() === 'DEPOT') ? '+' : '-' }}{{ mouvement.montant | number:'1.2-2'
@@ -112,20 +114,19 @@
         </div>
       </div>
       } @empty {
-      <div class="text-center py-16">
+      <div class="text-center py-12 lg:py-16">
         <div class="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center mx-auto mb-4">
           <span class="pi pi-receipt text-2xl text-gray-200"></span>
         </div>
-        <p class="text-gray-400 font-medium">Aucun mouvement pour le moment</p>
-        <p class="text-xs text-gray-300 mt-1">Vos transactions apparaîtront ici</p>
+        <p class="text-gray-400 font-medium">Aucun mouvement</p>
       </div>
       }
     </div>
   </div>
 
   <p-dialog [header]="operationType === 'depot' ? 'Déposer de l\'argent' : 'Retirer de l\'argent'"
-    [(visible)]="showModal" [modal]="true" [style]="{ width: '420px' }" [draggable]="false" [resizable]="false"
-    styleClass="rounded-2xl">
+    [(visible)]="showModal" [modal]="true" [draggable]="false" [resizable]="false"
+    styleClass="w-[calc(100%-2rem)] max-w-[420px] rounded-2xl" [appendTo]="'body'">
 
     <div class="py-2">
       <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Montant (€)</label>

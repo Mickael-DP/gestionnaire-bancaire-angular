@@ -1,5 +1,24 @@
-<nav class="fixed top-0 left-0 w-60 h-screen bg-white border-r border-gray-200/80 flex flex-col z-50">
+<header
+  class="lg:hidden fixed top-0 left-0 w-full h-16 bg-white border-b border-gray-100 flex items-center justify-between px-6 z-50">
+  <a routerLink="/comptes" class="flex items-center gap-2 no-underline">
+    <div class="w-8 h-8 rounded-lg bg-blue-800 flex items-center justify-center">
+      <span class="pi pi-building-columns text-white text-[12px]"></span>
+    </div>
+    <span class="text-base font-bold text-blue-900">Ma Banque</span>
+  </a>
+  @if (user) {
+  <div class="flex items-center gap-3">
+    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 text-xs font-bold">
+      {{ user.firstname[0] }}{{ user.lastname[0] }}
+    </div>
+    <button (click)="logout()" class="text-gray-400 hover:text-red-500 transition-colors">
+      <span class="pi pi-sign-out text-base"></span>
+    </button>
+  </div>
+  }
+</header>
 
+<nav class="hidden lg:flex fixed top-0 left-0 w-60 h-screen bg-white border-r border-gray-200/80 flex-col z-50">
   <div class="px-6 py-6 border-b border-gray-100">
     <a routerLink="/comptes" class="flex items-center gap-3 no-underline">
       <div class="w-9 h-9 rounded-xl bg-blue-800 flex items-center justify-center shadow-md shadow-blue-800/15">
@@ -30,12 +49,21 @@
         <p class="text-sm font-bold text-gray-900 truncate">{{ user.firstname }} {{ user.lastname }}</p>
       </div>
     </div>
-
     <button (click)="logout()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-red-500 text-sm font-semibold
                hover:bg-red-50 transition-all duration-200 w-full text-left">
       <span class="pi pi-sign-out text-base w-5 text-center"></span>
       Déconnexion
     </button>
   </div>
+</nav>
 
+<nav
+  class="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 flex items-center justify-around px-2 py-3 z-50 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+  @for (item of items; track item.routerLink) {
+  <a [routerLink]="item.routerLink" routerLinkActive="text-blue-700" [routerLinkActiveOptions]="{exact: item.exact}"
+    class="flex flex-col items-center gap-1 text-gray-400 no-underline">
+    <span [class]="item.icon + ' text-lg'"></span>
+    <span class="text-[10px] font-bold">{{ item.label }}</span>
+  </a>
+  }
 </nav>
