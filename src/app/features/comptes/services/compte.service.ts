@@ -8,7 +8,7 @@ import { Compte, CompteCreation } from '../../../shared/models/compte.model';
   providedIn: 'root',
 })
 export class CompteService {
-  private apiUrl = 'http://localhost:8080/api/comptes';
+ private apiUrl = 'https://gestionnaire-bancaire-spring-boot-production.up.railway.app/api/comptes';
 
   constructor(private http: HttpClient) {}
 
